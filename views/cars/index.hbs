@@ -1,0 +1,35 @@
+<h2>{{title}}</h2>
+
+<a href="cars/add">
+    <img height="25" src="images/add.png" alt="add button image">
+</a>
+
+{{!-- Display the cars list here --}}
+
+<table class="table table-success table-striped mt-3 ">
+    <thead>
+        <tr>
+            <th scope="col">Make</th>
+            <th scope="col">Model</th>
+            <th scope="col">Year</th>
+            <th scope="col">Mileage</th>
+            <th scope="col">Transmission</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each cars}}
+            <tr>
+                <td>{{this.make}}</td>
+                <td>{{this.model}}</td>
+                <td>{{this.year}}</td>
+                <td>{{this.mileage}}</td>
+                <td>{{this.transmission}}</td>
+                <td>
+                    <a href="/cars/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                    <a href="/cars/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
