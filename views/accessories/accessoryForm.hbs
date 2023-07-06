@@ -1,0 +1,45 @@
+<h2>{{title}}</h2>
+
+
+<div class="container mt-4">
+    <form class="w-50" method="POST">
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+            <input type="text" id="prodName" name="prodName" class="form-control" required value="{{accessoryFound.prodName}}" />
+            <label class="form-label" for="prodName">Product Name</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="dimensions" name="dimensions" class="form-control" required value="{{accessoryFound.dimensions}}" />
+            <label class="form-label" for="dimensions">dimensions</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="number" min="1.55" step="0.01" id="price" name="price" class="form-control" required
+                value="{{accessoryFound.price}}" />
+            <label class="form-label" for="price">price</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="modelNumber" name="modelNumber" class="form-control"
+                value="{{accessoryFound.modelNumber}}" required />
+            <label class="form-label" for="modelNumber">Model Number</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="number" min="0" id="quantity" name="quantity" class="form-control"
+                value="{{accessoryFound.quantity}}" required />
+            <label class="form-label" for="quantity">Quantity</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="type" name="type" class="form-control"
+                value="{{accessoryFound.type}}" required />
+            <label class="form-label" for="type">Type</label>
+        </div>
+
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+    </form>
+</div>

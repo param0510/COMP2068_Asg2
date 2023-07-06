@@ -1,0 +1,46 @@
+
+<h2>{{title}}</h2>
+
+
+<div class="container mt-4">
+    <form class="w-50" method="POST">
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+            <input type="text" id="brand" name="brand" class="form-control" required value="{{batteryFound.brand}}" />
+            <label class="form-label" for="brand">Brand</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="reserveCapacity" name="reserveCapacity" class="form-control" required value="{{batteryFound.reserveCapacity}}" />
+            <label class="form-label" for="reserveCapacity">reserveCapacity</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" min="35"  id="price" name="price" class="form-control" required
+                value="{{batteryFound.price}}" />
+            <label class="form-label" for="price">price</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="manufacPartNumber" name="manufacPartNumber" class="form-control" value="{{batteryFound.manufacPartNumber}}" required />
+            <label class="form-label" for="manufacPartNumber">manufacPartNumber</label>
+        </div>
+        
+        <div class="form-outline mb-4">
+            <input type="text" id="bciGrpSize" name="bciGrpSize" class="form-control" value="{{batteryFound.bciGrpSize}}" required />
+            <label class="form-label" for="bciGrpSize">bciGrpSize</label>
+        </div>
+
+        {{!-- <div class="form-outline mb-4">
+            <label class="form-label" for="transmission">Transmission</label>
+            <select class="form-select" name="transmission" id="transmission" required> --}}
+                {{!-- optionGenerator 'manual' batteryFound.transmission}}
+                {{!-- optionGenerator 'automatic' batteryFound.transmission}}
+            {{!-- </select>
+        </div> --}}
+
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+    </form>
+</div>

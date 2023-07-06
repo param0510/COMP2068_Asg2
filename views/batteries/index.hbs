@@ -1,0 +1,35 @@
+<h2>{{title}}</h2>
+
+<a href="batteries/add">
+    <img height="25" src="images/add.png" alt="add button image">
+</a>
+
+{{!-- Display the batteries list here --}}
+
+<table class="table table-success table-striped mt-3 ">
+    <thead>
+        <tr>
+            <th scope="col">Brand</th>
+            <th scope="col">Reserve Capacity</th>
+            <th scope="col">Manufacturer Part Number</th>
+            <th scope="col">Price</th>
+            <th scope="col">BCI Group Size</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each batteries}}
+        <tr>
+            <td>{{this.brand}}</td>
+            <td>{{this.reserveCapacity}}</td>
+            <td>{{this.manufacPartNumber}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.bciGrpSize}}</td>
+            <td>
+                <a href="/batteries/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                <a href="/batteries/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

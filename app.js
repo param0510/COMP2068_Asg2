@@ -6,11 +6,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var carsRouter = require('./routes/cars');
+var tiresRouter = require('./routes/tires');
+var batteriesRouter = require('./routes/batteries');
+var accessoriesRouter = require('./routes/accessories');
 
 const mongoose = require('mongoose')
 const systemConfig = require('./config/system')
 
-var app = express();
+var app = express(); 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +47,9 @@ mongoose.connect(systemConfig.db, {useNewUrlParser: true, useUnifiedTopology: tr
 
 app.use('/', indexRouter);
 app.use('/cars', carsRouter);
+app.use('/tires', tiresRouter);
+app.use('/batteries', batteriesRouter);
+app.use('/accessories', accessoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

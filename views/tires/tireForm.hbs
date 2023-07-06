@@ -1,0 +1,44 @@
+
+<h2>{{title}}</h2>
+
+
+<div class="container mt-4">
+    <form class="w-50" method="POST">
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+            <input type="text" id="brand" name="brand" class="form-control" required value="{{tireFound.brand}}" />
+            <label class="form-label" for="brand">brand</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="sku" name="sku" class="form-control" required value="{{tireFound.sku}}" />
+            <label class="form-label" for="sku">sku</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="number" min="25" id="price" name="price" class="form-control" required
+                value="{{tireFound.price}}" />
+            <label class="form-label" for="price">Price</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="text" id="size" name="size" class="form-control" value="{{tireFound.size}}" required />
+            <label class="form-label" for="size">Size</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label" for="category">Category</label>
+            <select class="form-select" name="category" id="category" required>
+                {{optionGenerator 'summer' tireFound.category}}
+                {{optionGenerator 'winter' tireFound.category}}
+                {{optionGenerator 'all-season' tireFound.category}}
+                {{optionGenerator 'off-road' tireFound.category}}
+                {{optionGenerator 'crossover' tireFound.category}}
+            </select>
+        </div>
+
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+    </form>
+</div>

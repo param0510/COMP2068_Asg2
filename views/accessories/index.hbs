@@ -1,0 +1,39 @@
+<h2>{{title}}</h2>
+
+<a href="accessories/add">
+    <img height="25" src="images/add.png" alt="add button image">
+</a>
+
+{{!-- Display the accessories list here --}}
+
+<table class="table table-success table-striped mt-3 ">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">dimensions</th>
+            <th scope="col">Model Number</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Type</th>
+            <th scope="col">Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {{#each accessories}}
+        <tr>
+            <td>{{this.prodName}}</td>
+            <td>{{this.dimensions}}</td>
+            <td>{{this.modelNumber}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.quantity}}</td>
+            <td>{{this.type}}</td>
+            <td>
+                <a href="/accessories/delete/{{this._id}}" class="btn btn-danger"
+                    onclick="return confirmDelete()">Delete</a>
+                <a href="/accessories/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
