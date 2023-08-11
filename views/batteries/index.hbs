@@ -6,30 +6,31 @@
 
 {{!-- Display the batteries list here --}}
 
-<table class="table table-success table-striped mt-3 ">
-    <thead>
-        <tr>
-            <th scope="col">Brand</th>
-            <th scope="col">Reserve Capacity</th>
-            <th scope="col">Manufacturer Part Number</th>
-            <th scope="col">Price</th>
-            <th scope="col">BCI Group Size</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each batteries}}
-        <tr>
-            <td>{{this.brand}}</td>
-            <td>{{this.reserveCapacity}}</td>
-            <td>{{this.manufacPartNumber}}</td>
-            <td>{{this.price}}</td>
-            <td>{{this.bciGrpSize}}</td>
-            <td>
+<div class="d-flex">
+
+    {{#each batteries}}
+        <div class="card w-25 m-3">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="images/placeholder/car_battery.jpg" class="img-fluid" />
+                <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{this.brand}} - {{this.bciGrpSize}}</h5>
+                <div class="d-flex mb-2">
+                    <div class="text-muted">#{{this.manufacPartNumber}}</div>
+                    <div class="mx-auto">{{this.reserveCapacity}}</div>
+                    <div class="">${{this.price}}</div>
+                </div>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.</p>
+                <a href="#!" class="btn btn-success">Buy</a>
+                <a href="#!" class="btn btn-primary">View</a>
                 <a href="/batteries/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
                 <a href="/batteries/edit/{{this._id}}" class="btn btn-warning">Edit</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+            </div>
+        </div>
+    {{/each}}
+
+</div>

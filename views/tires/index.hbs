@@ -6,30 +6,29 @@
 
 {{!-- Display the tires list here --}}
 
-<table class="table table-success table-striped mt-3 ">
-    <thead>
-        <tr>
-            <th scope="col">Brand</th>
-            <th scope="col">Category</th>
-            <th scope="col">Sku</th>
-            <th scope="col">Price</th>
-            <th scope="col">Size</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each tires}}
-        <tr>
-            <td>{{this.brand}}</td>
-            <td>{{this.category}}</td>
-            <td>{{this.sku}}</td>
-            <td>{{this.price}}</td>
-            <td>{{this.size}}</td>
-            <td>
+<div class="d-flex">
+    {{#each tires}}
+        <div class="card w-25 m-3">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="images/placeholder/tires.jpg" class="img-fluid" />
+                <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{this.brand}} - {{this.category}} tires set <span class="h6 text-muted">({{this.size}})</span> </h5>
+                <div class="d-flex mb-2">
+                    <div class="text-muted">#{{this.sku}}</div>
+                    <div class="mx-auto"></div>
+                    <div class="">${{this.price}}</div>
+                </div>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.</p>
+                <a href="#!" class="btn btn-success">Buy/Add to Cart</a>
+                <a href="#!" class="btn btn-primary">View</a>
                 <a href="/tires/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
                 <a href="/tires/edit/{{this._id}}" class="btn btn-warning">Edit</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+            </div>
+        </div>
+    {{/each}}
+</div>

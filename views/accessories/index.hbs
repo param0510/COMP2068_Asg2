@@ -6,34 +6,37 @@
 
 {{!-- Display the accessories list here --}}
 
-<table class="table table-success table-striped mt-3 ">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">dimensions</th>
-            <th scope="col">Model Number</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Type</th>
-            <th scope="col">Actions</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        {{#each accessories}}
-        <tr>
-            <td>{{this.prodName}}</td>
-            <td>{{this.dimensions}}</td>
-            <td>{{this.modelNumber}}</td>
-            <td>{{this.price}}</td>
-            <td>{{this.quantity}}</td>
-            <td>{{this.type}}</td>
-            <td>
-                <a href="/accessories/delete/{{this._id}}" class="btn btn-danger"
-                    onclick="return confirmDelete()">Delete</a>
+<div class="d-flex">
+
+    {{#each accessories}}
+        <div class="card w-25 m-3">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="images/placeholder/car_accessories.webp" alt="accessory image" class="img-fluid" />
+                <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{this.prodName}} <span class="h6 text-muted">({{this.dimensions}})</span> </h5>
+                <div class="d-flex mb-2">
+                    <div class="text-muted">#{{this.modelNumber}}</div>
+                    <div class="mx-auto"></div>
+                    <div class="">${{this.price}}</div>
+                </div>
+                <div class="d-flex mb-2 text-muted">
+                    <div class=" ">Category: {{this.type}}</div>
+                    <div class="mx-auto"></div>
+                    <div class="">{{this.quantity}} in stock</div>
+                </div>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.</p>
+                <a href="#!" class="btn btn-success">Buy</a>
+                <a href="#!" class="btn btn-primary">View</a>
+                <a href="/accessories/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
                 <a href="/accessories/edit/{{this._id}}" class="btn btn-warning">Edit</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+            </div>
+        </div>
+    {{/each}}
+
+</div>
