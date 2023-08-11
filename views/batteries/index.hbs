@@ -6,12 +6,17 @@
 
 {{!-- Display the batteries list here --}}
 
-<div class="d-flex">
+<div class="d-flex  flex-wrap container-fluid">
 
     {{#each batteries}}
         <div class="card w-25 m-3">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="images/placeholder/car_battery.jpg" class="img-fluid" />
+                {{#if (areEqual this.imageName "")}}
+                    <img src="images/placeholder/car_battery.jpg" class="img-fluid" />
+                {{else}}
+                {{!-- const --}}
+                    <img src="uploads/images/batteries/{{this.imageName}}" class="img-fluid" />
+                {{/if}}
                 <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
@@ -25,8 +30,8 @@
                 </div>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
                     content.</p>
-                <a href="#!" class="btn btn-success">Buy</a>
-                <a href="#!" class="btn btn-primary">View</a>
+                {{!-- <a href="#!" class="btn btn-success">Buy</a>
+                <a href="#!" class="btn btn-primary">View</a> --}}
                 <a href="/batteries/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
                 <a href="/batteries/edit/{{this._id}}" class="btn btn-warning">Edit</a>
             </div>

@@ -25,6 +25,9 @@ const schemaDefinitionObj = {
     type: {
         type: String,
         required: true
+    },
+    imageName: {
+        type: String
     }
 
 }

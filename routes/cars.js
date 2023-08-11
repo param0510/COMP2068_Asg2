@@ -3,6 +3,20 @@ const router = express.Router();
 
 const carModel = require('../models/car')
 
+const path = require('path');
+
+// multer set up
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: "./public/uploads/images/cars",
+    filename: (req, file, callback) => {
+        callback(null, file.fieldname + '_' + Date.now() +  path.extname(file.originalname))
+    }
+})
+
+// file size limit can be set too.
+var upload = multer({storage: storage})
+
 
 router.get('/', (req, res) => {
     carModel.find((err, carsFound) => {
@@ -22,15 +36,27 @@ router.get('/add', (req, res) => {
 })
 
 //post method for add car form
-router.post('/add', (req, res) => {
-    // res.render('')
+router.post('/add', upload.single('file') , (req, res) => {
+
+    var fileName = ''
+
+    if (!req.file) {
+        console.log("No file received.");
+
+    } else {
+        console.log('file received');
+        fileName = req.file.filename
+    }
+
+
     carModel.create(
         {
             make: req.body.make,
             model: req.body.model,
             year: req.body.year,
             mileage: req.body.mileage,
-            transmission: req.body.transmission
+            transmission: req.body.transmission,
+            imageName: fileName
         }, (err, newCar) =>{
             if(err) {
                 console.log('Error in making new car entry')
@@ -64,13 +90,26 @@ router.get('/edit/:id', (req, res) => {
     })
 })
 
-router.post('/edit/:id', (req, res) => {
+router.post('/edit/:id', upload.single('file'), (req, res) => {
+
+    var fileName = ''
+    if(req.file){
+        // console.log('file recieved')
+        fileName = req.file.filename
+        
+    }
+    else if(req.body.prevImgName){
+        fileName = req.body.prevImgName
+        // console.log('file not recieved')
+    }
+
     carModel.findByIdAndUpdate(req.params.id, {
         make: req.body.make,
         model: req.body.model,
         year: req.body.year,
         mileage: req.body.mileage,
-        transmission: req.body.transmission
+        transmission: req.body.transmission,
+        imageName: fileName
     }, (err, updatedCar) => {
         if(err){
             console.log(err)

@@ -15,6 +15,19 @@ const systemConfig = require('./config/system')
 
 var app = express(); 
 
+// multer setup
+const multer = require('multer')
+
+// No use of this
+const storage = multer.diskStorage({
+  destination: "/uploads/images",
+  filename: (req, file, callback) => {
+    callback(null, file.fieldname)
+  }
+})
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -35,6 +48,11 @@ hbs.registerHelper('optionGenerator', (optValue, targetValue) => {
   }
     return new hbs.SafeString(`<option value="${optValue}" ${selectedAttribute} >${optValue}</option>`)
 })
+
+hbs.registerHelper('areEqual', (firstVal, lastVal) => {
+  return (firstVal === lastVal)
+})
+
 // app.use(hbs)
 
 mongoose.connect(systemConfig.db, {useNewUrlParser: true, useUnifiedTopology: true})

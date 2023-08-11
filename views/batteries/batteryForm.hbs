@@ -3,7 +3,17 @@
 
 
 <div class="container mt-4">
-    <form class="w-50" method="POST">
+    <form class="w-50" method="POST" enctype="multipart/form-data">
+
+        {{!-- hidden label storing name for previous image --}}
+        <input type="text" hidden value="{{batteryFound.imageName}}" name="prevImgName">
+
+        {{!-- file upload --}}
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="file" name="file">
+            <label class="input-group-text" for="file">Upload Image</label>
+        </div>
+
         <!-- Name input -->
         <div class="form-outline mb-4">
             <input type="text" id="brand" name="brand" class="form-control" required value="{{batteryFound.brand}}" />

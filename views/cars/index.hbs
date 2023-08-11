@@ -7,11 +7,16 @@
 {{!-- Display the cars list here --}}
 
 
-<div class=" d-flex">
+<div class=" d-flex flex-wrap container-fluid">
     {{#each cars}}
         <div class="card w-25 m-3">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="images/placeholder/car.webp" class="img-fluid" />
+                {{#if (areEqual this.imageName "")}}
+                    <img src="images/placeholder/car.webp" class="img-fluid" />
+                {{else}}
+                    {{!-- const  --}}
+                    <img src="uploads/images/cars/{{this.imageName}}" class="img-fluid" />
+                {{/if}}
                 <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
@@ -24,10 +29,14 @@
 
                 {{!-- Fluctuate these options with user change --}}
                 {{!-- Client role --}}
-                <a href="#!" class="btn btn-success">Buy/Add to Cart</a>
+                {{!-- <a href="#!" class="btn btn-success">Buy/Add to Cart</a> --}}
                 {{!-- Admin role --}}
-                <a href="/cars/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                {{!-- <div class="d-flex flex-wrap"> --}}
+                <a href="/cars/delete/{{this._id}}" class="btn btn-danger " onclick="return confirmDelete()">Delete</a>
+                    {{!-- <div class="mx-auto"></div> --}}
                 <a href="/cars/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+                {{!-- </div> --}}
+
             </div>
         </div>
     {{/each}}

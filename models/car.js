@@ -21,6 +21,9 @@ const schemaDefinitionObj = {
     transmission: {
         type: String,
         required: true
+    }, 
+    imageName: {
+        type: String
     }
 
 }

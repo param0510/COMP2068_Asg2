@@ -21,6 +21,9 @@ const schemaDefinitionObj = {
     bciGrpSize: {
         type: String,
         required: true
+    },
+    imageName: {
+        type: String
     }
 
 }

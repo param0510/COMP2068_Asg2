@@ -3,6 +3,19 @@ const router = express.Router();
 
 const tireModel = require('../models/tire')
 
+const path = require('path');
+
+// multer set up
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: "./public/uploads/images/tires",
+    filename: (req, file, callback) => {
+        callback(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+// file size limit can be set too.
+var upload = multer({ storage: storage })
 
 router.get('/', (req, res) => {
     tireModel.find((err, tiresFound) => {
@@ -22,15 +35,26 @@ router.get('/add', (req, res) => {
 })
 
 //post method for add tire form
-router.post('/add', (req, res) => {
-    // res.render('')
+router.post('/add', upload.single('file'), (req, res) => {
+
+    var fileName = ''
+
+    if (!req.file) {
+        // console.log("No file received.");
+
+    } else {
+        // console.log('file received');
+        fileName = req.file.filename
+    }
+
     tireModel.create(
         {
             brand: req.body.brand,
             category: req.body.category,
             sku: req.body.sku,
             price: req.body.price,
-            size: req.body.size
+            size: req.body.size,
+            imageName: fileName
         }, (err, newtire) => {
             if (err) {
                 console.log('Error in making new tire entry')
@@ -69,13 +93,26 @@ router.get('/edit/:id', (req, res) => {
 })
 
 // Post router for edit page
-router.post('/edit/:id', (req, res) => {
+router.post('/edit/:id', upload.single('file'), (req, res) => {
+
+    var fileName = ''
+    if (req.file) {
+        // console.log('file recieved')
+        fileName = req.file.filename
+
+    }
+    else if (req.body.prevImgName) {
+        fileName = req.body.prevImgName
+        // console.log('file not recieved')
+    }
+
     tireModel.findByIdAndUpdate(req.params.id, {
         brand: req.body.brand,
         category: req.body.category,
         sku: req.body.sku,
         price: req.body.price,
-        size: req.body.size
+        size: req.body.size,
+        imageName: fileName
     }, (err, updatedtire) => {
         if (err) {
             console.log(err)

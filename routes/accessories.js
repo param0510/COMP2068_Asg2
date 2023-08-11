@@ -3,6 +3,19 @@ const router = express.Router();
 
 const accessoryModel = require('../models/accessory')
 
+const path = require('path');
+
+// multer set up
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: "./public/uploads/images/accessories",
+    filename: (req, file, callback) => {
+        callback(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+// file size limit can be set too.
+var upload = multer({ storage: storage })
 
 router.get('/', (req, res) => {
     accessoryModel.find((err, accessoriesFound) => {
@@ -22,8 +35,19 @@ router.get('/add', (req, res) => {
 })
 
 //post method for add accessory form
-router.post('/add', (req, res) => {
+router.post('/add', upload.single('file'), (req, res) => {
     // res.render('')
+
+    var fileName = ''
+
+    if (!req.file) {
+        // console.log("No file received.");
+
+    } else {
+        // console.log('file received');
+        fileName = req.file.filename
+    }
+    
     accessoryModel.create(
         {
             prodName: req.body.prodName,
@@ -31,7 +55,8 @@ router.post('/add', (req, res) => {
             price: parseFloat(req.body.price),
             modelNumber: req.body.modelNumber,
             quantity: req.body.quantity,
-            type: req.body.type
+            type: req.body.type,
+            imageName: fileName
         }, (err, newaccessory) => {
             if (err) {
                 console.log(`Error in making new accessory record entry \n ${err}`)
@@ -70,14 +95,26 @@ router.get('/edit/:id', (req, res) => {
 })
 
 // Post router for edit page
-router.post('/edit/:id', (req, res) => {
+router.post('/edit/:id', upload.single('file'), (req, res) => {
+    var fileName = ''
+    if (req.file) {
+        // console.log('file recieved')
+        fileName = req.file.filename
+
+    }
+    else if (req.body.prevImgName) {
+        fileName = req.body.prevImgName
+        // console.log('file not recieved')
+    }
+    
     accessoryModel.findByIdAndUpdate(req.params.id, {
         prodName: req.body.prodName,
         dimensions: req.body.dimensions,
         price: parseFloat(req.body.price),
         modelNumber: req.body.modelNumber,
         quantity: req.body.quantity,
-        type: req.body.type
+        type: req.body.type,
+        imageName: fileName
     }, (err, updatedaccessory) => {
         if (err) {
             console.log(err)
