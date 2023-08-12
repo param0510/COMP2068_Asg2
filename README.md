@@ -1,4 +1,4 @@
-# COMP2068_Asg2
+# COMP2068_Asg2 - xStore
 xStore Application - Shop anywhere &amp; everywhere
 
 Live Site: https://xstore-s2023.onrender.com/
