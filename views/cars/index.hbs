@@ -1,8 +1,11 @@
 <h2>{{title}}</h2>
 
+{{#if authUser}}
 <a href="cars/add">
     <img height="25" src="images/add.png" alt="add button image">
 </a>
+    
+{{/if}}
 
 {{!-- Display the cars list here --}}
 
@@ -32,9 +35,11 @@
                 {{!-- <a href="#!" class="btn btn-success">Buy/Add to Cart</a> --}}
                 {{!-- Admin role --}}
                 {{!-- <div class="d-flex flex-wrap"> --}}
+                {{#if ../authUser}}
                 <a href="/cars/delete/{{this._id}}" class="btn btn-danger " onclick="return confirmDelete()">Delete</a>
-                    {{!-- <div class="mx-auto"></div> --}}
                 <a href="/cars/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+                {{/if}}
+                    {{!-- <div class="mx-auto"></div> --}}
                 {{!-- </div> --}}
 
             </div>

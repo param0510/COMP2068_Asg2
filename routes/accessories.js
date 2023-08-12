@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const accessoryModel = require('../models/accessory')
 
-const path = require('path');
+// login checker utility
+const isLoggedInUtility = require('../utilities/authUtility')
 
 // multer set up
 const multer = require('multer');
@@ -23,19 +25,19 @@ router.get('/', (req, res) => {
             console.log('Error finding any accessories in database')
         }
         else {
-            res.render('accessories/index', { title: "Our accessories", accessories: accessoriesFound })
+            res.render('accessories/index', { title: "Our accessories", accessories: accessoriesFound, authUser: req.user })
         }
     })
     // res.render('accessories/index', {title: "Our accessories"})
 })
 
 // get method for add accessory
-router.get('/add', (req, res) => {
-    res.render('accessories/accessoryForm', { title: "accessory Inventory Update" })
+router.get('/add', isLoggedInUtility, (req, res) => {
+    res.render('accessories/accessoryForm', { title: "accessory Inventory Update", authUser: req.user })
 })
 
 //post method for add accessory form
-router.post('/add', upload.single('file'), (req, res) => {
+router.post('/add', isLoggedInUtility, upload.single('file'), (req, res) => {
     // res.render('')
 
     var fileName = ''
@@ -70,7 +72,7 @@ router.post('/add', upload.single('file'), (req, res) => {
 
 
 // get router for Delete function
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', isLoggedInUtility, (req, res) => {
     accessoryModel.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
             console.log(`Error in deleting ${err}`)
@@ -83,19 +85,19 @@ router.get('/delete/:id', (req, res) => {
 
 
 // Get router for Edit page
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isLoggedInUtility, (req, res) => {
     accessoryModel.findById(req.params.id, (err, accessory) => {
         if (err) {
             console.log(err)
         }
         else (
-            res.render('accessories/accessoryForm', { title: 'Edit accessory', accessoryFound: accessory })
+            res.render('accessories/accessoryForm', { title: 'Edit accessory', accessoryFound: accessory, authUser: req.user })
         )
     })
 })
 
 // Post router for edit page
-router.post('/edit/:id', upload.single('file'), (req, res) => {
+router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) => {
     var fileName = ''
     if (req.file) {
         // console.log('file recieved')

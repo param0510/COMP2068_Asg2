@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const batteryModel = require('../models/battery')
 
-const path = require('path');
+// login checker utility
+const isLoggedInUtility = require('../utilities/authUtility')
+
 
 // multer set up
 const multer = require('multer');
@@ -23,19 +26,19 @@ router.get('/', (req, res) => {
             console.log('Error finding any batteries in database')
         }
         else {
-            res.render('batteries/index', { title: "Our batteries", batteries: batteriesFound })
+            res.render('batteries/index', { title: "Our batteries", batteries: batteriesFound, authUser: req.user })
         }
     })
     // res.render('batteries/index', {title: "Our batteries"})
 })
 
 // get method for add battery
-router.get('/add', (req, res) => {
-    res.render('batteries/batteryForm', { title: "battery Inventory Update" })
+router.get('/add', isLoggedInUtility, (req, res) => {
+    res.render('batteries/batteryForm', { title: "battery Inventory Update", authUser: req.user })
 })
 
 //post method for add battery form
-router.post('/add', upload.single('file'), (req, res) => {
+router.post('/add', isLoggedInUtility, upload.single('file'), (req, res) => {
     var fileName = ''
 
     if (!req.file) {
@@ -67,7 +70,7 @@ router.post('/add', upload.single('file'), (req, res) => {
 
 
 // get router for Delete function
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', isLoggedInUtility, (req, res) => {
     batteryModel.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
             console.log(`Error in deleting ${err}`)
@@ -80,19 +83,19 @@ router.get('/delete/:id', (req, res) => {
 
 
 // Get router for Edit page
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isLoggedInUtility, (req, res) => {
     batteryModel.findById(req.params.id, (err, battery) => {
         if (err) {
             console.log(err)
         }
         else (
-            res.render('batteries/batteryForm', { title: 'Edit battery', batteryFound: battery })
+            res.render('batteries/batteryForm', { title: 'Edit battery', batteryFound: battery, authUser: req.user })
         )
     })
 })
 
 // Post router for edit page
-router.post('/edit/:id', upload.single('file'), (req, res) => {
+router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) => {
 
     var fileName = ''
     if (req.file) {

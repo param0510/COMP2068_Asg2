@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const carModel = require('../models/car')
 
-const path = require('path');
+// importing the isLogginIn function to check authorization
+const isLoggedInUtility = require('../utilities/authUtility')
+
+
+// image upload setup
 
 // multer set up
 const multer = require('multer');
@@ -19,24 +24,24 @@ var upload = multer({storage: storage})
 
 
 router.get('/', (req, res) => {
+    
     carModel.find((err, carsFound) => {
         if (err) {
             console.log('Error finding any cars in database')
         }
         else {
-            res.render('cars/index', { title: "Our Cars", cars: carsFound })
+            res.render('cars/index', { title: "Our Cars", cars: carsFound, authUser: req.user })
         }
     })
-    // res.render('cars/index', {title: "Our Cars"})
 })
 
 // get method for add car
-router.get('/add', (req, res) => {
-    res.render('cars/carForm', {title: "Car Inventory Update"})
+router.get('/add', isLoggedInUtility , (req, res) => {
+    res.render('cars/carForm', { title: "Car Inventory Update", authUser: req.user })
 })
 
 //post method for add car form
-router.post('/add', upload.single('file') , (req, res) => {
+router.post('/add', isLoggedInUtility, upload.single('file') , (req, res) => {
 
     var fileName = ''
 
@@ -68,7 +73,7 @@ router.post('/add', upload.single('file') , (req, res) => {
     )
 })
 
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', isLoggedInUtility, (req, res) => {
     carModel.findByIdAndRemove(req.params.id, (err) => {
         if (err){
             console.log(`Error in deleting ${err}`)
@@ -79,18 +84,18 @@ router.get('/delete/:id', (req, res) => {
     })
 })
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isLoggedInUtility, (req, res) => {
     carModel.findById(req.params.id, (err, car) => {
         if (err){
             console.log(err)
         }
         else(
-            res.render('cars/carForm', {title: 'Edit Car', carFound: car})
+            res.render('cars/carForm', { title: 'Edit Car', carFound: car, authUser: req.user })
         )
     })
 })
 
-router.post('/edit/:id', upload.single('file'), (req, res) => {
+router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) => {
 
     var fileName = ''
     if(req.file){

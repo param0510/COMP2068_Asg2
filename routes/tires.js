@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const tireModel = require('../models/tire')
 
-const path = require('path');
+// login checker utility
+const isLoggedInUtility = require('../utilities/authUtility')
+
 
 // multer set up
 const multer = require('multer');
@@ -23,19 +26,21 @@ router.get('/', (req, res) => {
             console.log('Error finding any tires in database')
         }
         else {
-            res.render('tires/index', { title: "Our tires", tires: tiresFound })
+            res.render('tires/index', { title: "Our tires", tires: tiresFound, authUser: req.user })
         }
     })
     // res.render('tires/index', {title: "Our tires"})
 })
 
+
+
 // get method for add tire
-router.get('/add', (req, res) => {
-    res.render('tires/tireForm', { title: "tire Inventory Update" })
+router.get('/add', isLoggedInUtility, isLoggedInUtility, (req, res) => {
+    res.render('tires/tireForm', { title: "tire Inventory Update", authUser: req.user })
 })
 
 //post method for add tire form
-router.post('/add', upload.single('file'), (req, res) => {
+router.post('/add', isLoggedInUtility, upload.single('file'), (req, res) => {
 
     var fileName = ''
 
@@ -68,7 +73,7 @@ router.post('/add', upload.single('file'), (req, res) => {
 
 
 // get router for Delete function
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', isLoggedInUtility, (req, res) => {
     tireModel.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
             console.log(`Error in deleting ${err}`)
@@ -81,19 +86,19 @@ router.get('/delete/:id', (req, res) => {
 
 
 // Get router for Edit page
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isLoggedInUtility, (req, res) => {
     tireModel.findById(req.params.id, (err, tire) => {
         if (err) {
             console.log(err)
         }
         else (
-            res.render('tires/tireForm', { title: 'Edit tire', tireFound: tire })
+            res.render('tires/tireForm', { title: 'Edit tire', tireFound: tire, authUser: req.user })
         )
     })
 })
 
 // Post router for edit page
-router.post('/edit/:id', upload.single('file'), (req, res) => {
+router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) => {
 
     var fileName = ''
     if (req.file) {

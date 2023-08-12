@@ -1,8 +1,10 @@
 <h2>{{title}}</h2>
 
-<a href="tires/add">
-    <img height="25" src="images/add.png" alt="add button image">
-</a>
+{{#if authUser}}
+    <a href="tires/add">
+        <img height="25" src="images/add.png" alt="add button image">
+    </a>
+{{/if}}
 
 {{!-- Display the tires list here --}}
 
@@ -31,8 +33,10 @@
                     content.</p>
                 {{!-- <a href="#!" class="btn btn-success">Buy/Add to Cart</a>
                 <a href="#!" class="btn btn-primary">View</a> --}}
-                <a href="/tires/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
-                <a href="/tires/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+                {{#if ../authUser}}
+                    <a href="/tires/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                    <a href="/tires/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+                {{/if}}
             </div>
         </div>
     {{/each}}
