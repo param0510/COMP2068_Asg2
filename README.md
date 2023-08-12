@@ -1,6 +1,8 @@
 # COMP2068_Asg2
 xStore Application - Shop anywhere &amp; everywhere
 
+Live Site: https://xstore-s2023.onrender.com/
+
 This is an application built using 'express-generator' with hbs template engine.
 <br>
 (Backend: ExpressJS; Frontend: Hbs Templates)
