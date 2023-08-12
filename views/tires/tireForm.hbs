@@ -1,3 +1,4 @@
+{{!-- form used for both adding and editing a tire object in the mongo database --}}
 
 <h2>{{title}}</h2>
 
@@ -30,6 +31,11 @@
         <div class="form-outline mb-4">
             <input type="text" id="size" name="size" class="form-control" value="{{tireFound.size}}" required />
             <label class="form-label" for="size">Size</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="desc" rows="4" name="desc">{{tireFound.desc}}</textarea>
+            <label class="form-label" for="desc">Message</label>
         </div>
 
         <div class="form-outline mb-4">

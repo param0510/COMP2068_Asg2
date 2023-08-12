@@ -59,7 +59,8 @@ router.post('/add', isLoggedInUtility, upload.single('file'), (req, res) => {
             sku: req.body.sku,
             price: req.body.price,
             size: req.body.size,
-            imageName: fileName
+            imageName: fileName,
+            desc: req.body.desc
         }, (err, newtire) => {
             if (err) {
                 console.log('Error in making new tire entry')
@@ -117,7 +118,8 @@ router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) =>
         sku: req.body.sku,
         price: req.body.price,
         size: req.body.size,
-        imageName: fileName
+        imageName: fileName,
+        desc: req.body.desc
     }, (err, updatedtire) => {
         if (err) {
             console.log(err)

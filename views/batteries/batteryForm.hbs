@@ -1,4 +1,6 @@
 
+{{!-- form used for both adding and editing a battery object in the mongo database --}}
+
 <h2>{{title}}</h2>
 
 
@@ -41,14 +43,10 @@
             <label class="form-label" for="bciGrpSize">bciGrpSize</label>
         </div>
 
-        {{!-- <div class="form-outline mb-4">
-            <label class="form-label" for="transmission">Transmission</label>
-            <select class="form-select" name="transmission" id="transmission" required> --}}
-                {{!-- optionGenerator 'manual' batteryFound.transmission}}
-                {{!-- optionGenerator 'automatic' batteryFound.transmission}}
-            {{!-- </select>
-        </div> --}}
-
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="desc" rows="4" name="desc">{{batteryFound.desc}}</textarea>
+            <label class="form-label" for="desc">Message</label>
+        </div>
 
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>

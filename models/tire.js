@@ -24,7 +24,8 @@ const schemaDefinitionObj = {
     },
     imageName: {
         type: String
-    }
+    },
+    desc: String
 
 }
 

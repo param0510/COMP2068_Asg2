@@ -1,5 +1,6 @@
 {{!-- Code Source: https://epicbootstrap.com/snippets/registration --}}
 
+{{!-- Register Page --}}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
     rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -13,6 +14,7 @@
         <div class="form-group">
             <input type="email" class="form-control item" id="username" name="username" placeholder="email@email.com*" required>
         </div>
+        {{!-- Haven't used this yet --}}
         {{!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" --}}
         <div class="form-group">
             <input type="password" class="form-control item" id="password" name="password" placeholder="Password*"  required>
@@ -20,17 +22,7 @@
         <div class="form-group">
             <input type="password" class="form-control item" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password*"  required>
         </div>
-        {{!-- <div class="form-group">
-            <input type="text" class="form-control item" id="email" placeholder="Email">
-        </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control item" id="birth-date" placeholder="Birth Date">
-        </div> --}}
-        <div class="form-group">
-            {{!-- <a href="/login"></a> --}}
             <button  class="btn btn-block create-account">Create Account</button>
         </div>
     </form>
@@ -38,13 +30,8 @@
         <h5>Sign up with social media</h5>
         <div class="social-icons">
             <a href="/github"><i class="icon-social-github" title="Github"></i></a>
-            {{!-- <a href="#"><i class="icon-social-google" title="Google"></i></a>
-            <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a> --}}
         </div>
     </div>
 </div>
 <script defer type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script defer type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-{{!--
-<script src="assets/js/script.js"></script> --}}
+<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>

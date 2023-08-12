@@ -58,7 +58,8 @@ router.post('/add', isLoggedInUtility, upload.single('file'), (req, res) => {
             modelNumber: req.body.modelNumber,
             quantity: req.body.quantity,
             type: req.body.type,
-            imageName: fileName
+            imageName: fileName,
+            desc: req.body.desc
         }, (err, newaccessory) => {
             if (err) {
                 console.log(`Error in making new accessory record entry \n ${err}`)
@@ -116,7 +117,8 @@ router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) =>
         modelNumber: req.body.modelNumber,
         quantity: req.body.quantity,
         type: req.body.type,
-        imageName: fileName
+        imageName: fileName,
+        desc: req.body.desc
     }, (err, updatedaccessory) => {
         if (err) {
             console.log(err)

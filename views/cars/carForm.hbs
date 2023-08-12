@@ -1,7 +1,12 @@
-{{!-- <link rel="stylesheet" href="/stylesheets/forms.css"> --}}
+{{!-- Forms have been taken from mdbootstrap: https://mdbootstrap.com/docs/standard/forms/overview/ --}}
+
+
+{{!-- form used for both adding and editing a car object in the mongo database --}}
 <h2>{{title}}</h2>
 
+
 <div class="container mt-4">
+    
         {{!-- <div> --}}
             {{!-- {{#if (areEqual carFound.imageName "")}}
             {{!-- {{else}} 
@@ -43,6 +48,11 @@
         </div>
 
         <div class="form-outline mb-4">
+            <textarea class="form-control" id="desc" rows="4" name="desc">{{carFound.desc}}</textarea>
+            <label class="form-label" for="desc">Message</label>
+        </div>
+
+        <div class="form-outline mb-4">
             <label class="form-label" for="transmission">Transmission</label>
             <select class="form-select" name="transmission" id="transmission" required>
                 {{!-- <option disabled selected class="text-secondary">Transmission</option> --}}
@@ -53,25 +63,6 @@
             </select>
         </div>
 
-        <!-- Email input -->
-        {{!-- <div class="form-outline mb-4">
-            <input type="email" id="form4Example2" class="form-control" />
-            <label class="form-label" for="form4Example2">Email address</label>
-        </div> --}}
-
-        <!-- Message input -->
-        {{!-- <div class="form-outline mb-4">
-            <textarea class="form-control" id="form4Example3" rows="4"></textarea>
-            <label class="form-label" for="form4Example3">Message</label>
-        </div> --}}
-
-        <!-- Checkbox -->
-        {{!-- <div class="form-check d-flex justify-content-center mb-4">
-            <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
-            <label class="form-check-label" for="form4Example4">
-                Send me a copy of this message
-            </label>
-        </div> --}}
 
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>

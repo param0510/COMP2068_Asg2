@@ -1,3 +1,5 @@
+{{!-- cars list display page - lists out all the car objects stored in the database --}}
+
 <h2>{{title}}</h2>
 
 {{#if authUser}}
@@ -27,19 +29,16 @@
             <div class="card-body">
                 <h5 class="card-title">{{this.year}} {{this.make}} {{this.model}} ({{this.transmission}})</h5>
                 <h6 class="small text-muted">{{this.mileage}} kms</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
+                <p class="card-text">{{this.desc}}</p>
 
                 {{!-- Fluctuate these options with user change --}}
                 {{!-- Client role --}}
                 {{!-- <a href="#!" class="btn btn-success">Buy/Add to Cart</a> --}}
                 {{!-- Admin role --}}
-                {{!-- <div class="d-flex flex-wrap"> --}}
                 {{#if ../authUser}}
                 <a href="/cars/delete/{{this._id}}" class="btn btn-danger " onclick="return confirmDelete()">Delete</a>
                 <a href="/cars/edit/{{this._id}}" class="btn btn-warning">Edit</a>
                 {{/if}}
-                    {{!-- <div class="mx-auto"></div> --}}
                 {{!-- </div> --}}
 
             </div>

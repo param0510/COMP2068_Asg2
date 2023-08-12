@@ -9,7 +9,6 @@ const isLoggedInUtility = require('../utilities/authUtility')
 
 
 // image upload setup
-
 // multer set up
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -18,11 +17,11 @@ const storage = multer.diskStorage({
         callback(null, file.fieldname + '_' + Date.now() +  path.extname(file.originalname))
     }
 })
-
 // file size limit can be set too.
 var upload = multer({storage: storage})
 
 
+// get method for default url "cars/" -> displays the index page 
 router.get('/', (req, res) => {
     
     carModel.find((err, carsFound) => {
@@ -53,7 +52,7 @@ router.post('/add', isLoggedInUtility, upload.single('file') , (req, res) => {
         fileName = req.file.filename
     }
 
-
+    // creating a new car entry in the database
     carModel.create(
         {
             make: req.body.make,
@@ -61,7 +60,8 @@ router.post('/add', isLoggedInUtility, upload.single('file') , (req, res) => {
             year: req.body.year,
             mileage: req.body.mileage,
             transmission: req.body.transmission,
-            imageName: fileName
+            imageName: fileName,
+            desc: req.body.desc
         }, (err, newCar) =>{
             if(err) {
                 console.log('Error in making new car entry')
@@ -73,6 +73,7 @@ router.post('/add', isLoggedInUtility, upload.single('file') , (req, res) => {
     )
 })
 
+// get method for cars/delete/:id
 router.get('/delete/:id', isLoggedInUtility, (req, res) => {
     carModel.findByIdAndRemove(req.params.id, (err) => {
         if (err){
@@ -84,6 +85,7 @@ router.get('/delete/:id', isLoggedInUtility, (req, res) => {
     })
 })
 
+// get method for cars/edit/:id
 router.get('/edit/:id', isLoggedInUtility, (req, res) => {
     carModel.findById(req.params.id, (err, car) => {
         if (err){
@@ -95,6 +97,7 @@ router.get('/edit/:id', isLoggedInUtility, (req, res) => {
     })
 })
 
+// post method for cars/edit/:id - edits a specific car(found using id parameter) stored in database
 router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) => {
 
     var fileName = ''
@@ -108,13 +111,15 @@ router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) =>
         // console.log('file not recieved')
     }
 
+    // editing a given car in the database
     carModel.findByIdAndUpdate(req.params.id, {
         make: req.body.make,
         model: req.body.model,
         year: req.body.year,
         mileage: req.body.mileage,
         transmission: req.body.transmission,
-        imageName: fileName
+        imageName: fileName,
+        desc: req.body.desc
     }, (err, updatedCar) => {
         if(err){
             console.log(err)

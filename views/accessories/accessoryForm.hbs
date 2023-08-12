@@ -1,3 +1,5 @@
+{{!-- form used for both adding and editing a accessory object in the mongo database --}}
+
 <h2>{{title}}</h2>
 
 
@@ -20,7 +22,7 @@
         </div>
 
         <div class="form-outline mb-4">
-            <input type="text" id="dimensions" name="dimensions" class="form-control" required value="{{accessoryFound.dimensions}}" />
+            <input type="text" id="dimensions" name="dimensions" class="form-control" value="{{accessoryFound.dimensions}}" />
             <label class="form-label" for="dimensions">dimensions</label>
         </div>
 
@@ -48,6 +50,10 @@
             <label class="form-label" for="type">Type</label>
         </div>
 
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="desc" rows="4" name="desc">{{accessoryFound.desc}}</textarea>
+            <label class="form-label" for="desc">Message</label>
+        </div>
 
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>

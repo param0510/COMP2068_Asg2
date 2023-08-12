@@ -11,8 +11,7 @@ const schemaDefinitionObj = {
         required: true
     },
     dimensions: {
-        type: String,
-        required: true
+        type: String
     },
     modelNumber: {
         type: String,
@@ -27,6 +26,9 @@ const schemaDefinitionObj = {
         required: true
     },
     imageName: {
+        type: String
+    },
+    desc: {
         type: String
     }
 

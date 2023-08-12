@@ -56,7 +56,8 @@ router.post('/add', isLoggedInUtility, upload.single('file'), (req, res) => {
             manufacPartNumber: req.body.manufacPartNumber,
             price: parseFloat(req.body.price),
             bciGrpSize: req.body.bciGrpSize,
-            imageName: fileName
+            imageName: fileName,
+            desc: req.body.desc
         }, (err, newbattery) => {
             if (err) {
                 console.log(`Error in making new battery record entry \n ${err}`)
@@ -113,7 +114,8 @@ router.post('/edit/:id', isLoggedInUtility, upload.single('file'), (req, res) =>
         manufacPartNumber: req.body.manufacPartNumber,
         price: parseFloat(req.body.price),
         bciGrpSize: req.body.bciGrpSize,
-        imageName: fileName
+        imageName: fileName,
+        desc: req.body.desc
     }, (err, updatedbattery) => {
         if (err) {
             console.log(err)
